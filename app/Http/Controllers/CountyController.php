@@ -17,7 +17,7 @@ class CountyController extends Controller
         ]);
     }
 
-    public function getById($id): JsonResponse
+    public function show($id): JsonResponse
     {
         $county = County::where('id', $id)->first();
         return response()->json([
