@@ -49,8 +49,8 @@ class CityController extends Controller
      * @apiGroup City
      * @apiVersion 1.0.0
      *
-     * @apiParam (body) {String} name City name (required)
-     * @apiParam (body) {Number} county_id County ID (required)
+     * @apiBody {String} name City name (required)
+     * @apiBody {Number} county_id County ID (required)
      *
      * @apiParamExample {json} Request-Example:
      *     {
@@ -129,8 +129,9 @@ class CityController extends Controller
      * @apiVersion 1.0.0
      *
      * @apiParam {Number} id City ID
-     * @apiParam (body) {String} [name] City name
-     * @apiParam (body) {Number} [county_id] County ID
+     *
+     * @apiBody {String} [name] City name
+     * @apiBody {Number} [county_id] County ID
      *
      * @apiParamExample {json} Request-Example:
      *     {

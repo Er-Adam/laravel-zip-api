@@ -73,7 +73,7 @@ class CountyController extends Controller
      * @apiGroup County
      * @apiVersion 1.0.0
      *
-     * @apiParam (body) {String} name County name (required)
+     * @apiBody {String} name County name (required)
      *
      * @apiParamExample {json} Request-Example:
      *     {
@@ -108,7 +108,8 @@ class CountyController extends Controller
      * @apiVersion 1.0.0
      *
      * @apiParam {Number} id County ID
-     * @apiParam (body) {String} [name] County name
+     *
+     * @apiBody {String} [name] County name
      *
      * @apiParamExample {json} Request-Example:
      *     {

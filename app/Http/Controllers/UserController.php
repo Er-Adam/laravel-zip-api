@@ -14,8 +14,8 @@ class UserController extends Controller
      * @apiGroup User
      * @apiVersion 1.0.0
      *
-     * @apiParam {String} email User email address (required)
-     * @apiParam {String} password User password (required)
+     * @apiBody {String} email User email address (required)
+     * @apiBody {String} password User password (required)
      *
      * @apiParamExample {json} Request-Example:
      *     {

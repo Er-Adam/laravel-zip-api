@@ -49,8 +49,8 @@ class PostalCodeController extends Controller
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
      *
-     * @apiParam (body) {Number} code Postal code (required)
-     * @apiParam (body) {Number} city_id City ID (required)
+     * @apiBody {Number} code Postal code (required)
+     * @apiBody {Number} city_id City ID (required)
      *
      * @apiParamExample {json} Request-Example:
      *     {
@@ -129,8 +129,8 @@ class PostalCodeController extends Controller
      * @apiVersion 1.0.0
      *
      * @apiParam {Number} id Postal code ID
-     * @apiParam (body) {Number} [postal_code] Postal code
-     * @apiParam (body) {Number} [city_id] City ID
+     * @apiBody {Number} [postal_code] Postal code
+     * @apiBody {Number} [city_id] City ID
      *
      * @apiParamExample {json} Request-Example:
      *     {
