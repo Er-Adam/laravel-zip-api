@@ -10,7 +10,30 @@ use Illuminate\Http\Request;
 class PostalCodeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @api {get} /api/postalcode Get all postal codes
+     * @apiName GetPostalCodes
+     * @apiGroup PostalCode
+     * @apiVersion 1.0.0
+     *
+     * @apiSuccess {Object[]} postalCodes List of postal codes
+     * @apiSuccess {Number} postalCodes.id Postal code ID
+     * @apiSuccess {String} postalCodes.postal_code Postal code
+     * @apiSuccess {Object} postalCodes.city City information
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "postalCodes": [
+     *         {
+     *           "id": 1,
+     *           "postal_code": 1012,
+     *           "city": {
+     *             "id": 1,
+     *             "name": "Amsterdam"
+     *           }
+     *         }
+     *       ]
+     *     }
      */
     public function index()
     {
@@ -20,21 +43,74 @@ class PostalCodeController extends Controller
         ]);
     }
 
-
     /**
-     * Store a newly created resource in storage.
+     * @api {post} /api/postalcode Create a new postal code
+     * @apiName CreatePostalCode
+     * @apiGroup PostalCode
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Number} code Postal code (required)
+     * @apiParam {Number} city_id City ID (required)
+     *
+     * @apiParamExample {json} Request-Example:
+     *     {
+     *       "postal_code": 1012,
+     *       "city_id": 1
+     *     }
+     *
+     * @apiSuccess {Object} postalcode Created postal code
+     * @apiSuccess {Number} postalcode.id Postal code ID
+     * @apiSuccess {Number} postalcode.postal_code Postal code
+     * @apiSuccess {Number} postalcode.city City information
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "postalcode": {
+     *         "id": 1,
+     *         "postal_code": 1012,
+     *         "city":{
+     *           "id": 1,
+     *           "name": "Amsterdam"
+     *         }
+     *       }
+     *     }
      */
     public function store(PostalCodeRequest $request)
     {
         $postalcode = PostalCode::create($request->validated());
+        $postalcodeResource = new PostalCodeResource($postalcode);
 
         return response()->json([
-            "postalcode" => $postalcode,
+            "postalcode" => $postalcodeResource,
         ]);
     }
 
     /**
-     * Display the specified resource.
+     * @api {get} /api/postalcode/:id Get a specific postal code
+     * @apiName GetPostalCode
+     * @apiGroup PostalCode
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Number} id Postal code ID
+     *
+     * @apiSuccess {Object} postalcode Postal code information
+     * @apiSuccess {Number} postalcode.id Postal code ID
+     * @apiSuccess {Number} postalcode.postal_code Postal code
+     * @apiSuccess {Object} postalcode.city City information
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "postalcode": {
+     *         "id": 1,
+     *         "postal_code": 1012,
+     *         "city": {
+     *           "id": 1,
+     *           "name": "Amsterdam"
+     *         }
+     *       }
+     *     }
      */
     public function show(string $id)
     {
@@ -46,22 +122,68 @@ class PostalCodeController extends Controller
         ]);
     }
 
-
     /**
-     * Update the specified resource in storage.
+     * @api {put} /api/postalcode/:id Update a postal code
+     * @apiName UpdatePostalCode
+     * @apiGroup PostalCode
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Number} id Postal code ID
+     * @apiParam {Number} [postal_code] Postal code
+     * @apiParam {Number} [city_id] City ID
+     *
+     * @apiParamExample {json} Request-Example:
+     *     {
+     *       "postal_code": 1013,
+     *       "city_id": 2
+     *     }
+     *
+     * @apiSuccess {Object} postalcode Updated postal code
+     * @apiSuccess {Number} postalcode.id Postal code ID
+     * @apiSuccess {Number} postalcode.postal_code Postal code
+     * @apiSuccess {Number} postalcode.city City information
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "postalcode": {
+     *         "id": 1,
+     *         "postal_code": 1013,
+     *         "city":{
+     *             "city_id": 2",
+     *             "name": "Rotterdam"
+     *         }
+     *       }
+     *     }
      */
     public function update(PostalCodeRequest $request, string $id)
     {
         $postalcode = PostalCode::findOrFail($id);
         $postalcode->update($request->validated());
+        $postalcodeResource = new PostalCodeResource($postalcode);
 
         return response()->json([
-            "postalcode" => $postalcode,
+            "postalcode" => $postalcodeResource,
         ]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @api {delete} /api/postalcode/:id Delete a postal code
+     * @apiName DeletePostalCode
+     * @apiGroup PostalCode
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Number} id Postal code ID
+     *
+     * @apiSuccess {String} message Success message
+     * @apiSuccess {Number} id Deleted postal code ID
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "message": "Postalcode deleted successfully",
+     *       "id": 1
+     *     }
      */
     public function destroy(string $id)
     {

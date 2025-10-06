@@ -8,6 +8,46 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    /**
+     * @api {post} /api/login User login
+     * @apiName UserLogin
+     * @apiGroup User
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} email User email address (required)
+     * @apiParam {String} password User password (required)
+     *
+     * @apiParamExample {json} Request-Example:
+     *     {
+     *       "email": "user@example.com",
+     *       "password": "password123"
+     *     }
+     *
+     * @apiSuccess {Object} user User information
+     * @apiSuccess {Number} user.id User ID
+     * @apiSuccess {String} user.name User name
+     * @apiSuccess {String} user.email User email
+     * @apiSuccess {String} token Authentication token
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "user": {
+     *         "id": 1,
+     *         "name": "John Doe",
+     *         "email": "user@example.com"
+     *       },
+     *       "token": "1|abcdefghijklmnopqrstuvwxyz"
+     *     }
+     *
+     * @apiError {String} message Error message
+     *
+     * @apiErrorExample {json} Error-Response:
+     *     HTTP/1.1 401 Unauthorized
+     *     {
+     *       "message": "Invalid email or password"
+     *     }
+     */
     public function login(Request $request)
     {
         $request->validate([
