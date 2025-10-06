@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CityResource extends JsonResource
+class CountyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,6 @@ class CityResource extends JsonResource
         return [
             'id'          => $this->id,
             'name'        => $this->name,
-            'county'      => $this->county ? new CountyResource($this->county) : null,
         ];
     }
 }
