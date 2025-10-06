@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CountyController extends Controller
 {
     /**
-     * @api {get} /api/county Get all counties
+     * @api {get} /county Get all counties
      * @apiName GetCounties
      * @apiGroup County
      * @apiVersion 1.0.0
@@ -39,7 +39,7 @@ class CountyController extends Controller
     }
 
     /**
-     * @api {get} /api/county/:id Get a specific county
+     * @api {get} /county/:id Get a specific county
      * @apiName GetCounty
      * @apiGroup County
      * @apiVersion 1.0.0
@@ -68,7 +68,7 @@ class CountyController extends Controller
     }
 
     /**
-     * @api {post} /api/county Create a new county
+     * @api {post} /county Create a new county
      * @apiName CreateCounty
      * @apiGroup County
      * @apiVersion 1.0.0
@@ -102,7 +102,7 @@ class CountyController extends Controller
     }
 
     /**
-     * @api {patch} /api/county/:id Update a county
+     * @api {patch} /county/:id Update a county
      * @apiName UpdateCounty
      * @apiGroup County
      * @apiVersion 1.0.0
@@ -139,7 +139,7 @@ class CountyController extends Controller
     }
 
     /**
-     * @api {delete} /api/county/:id Delete a county
+     * @api {delete} /county/:id Delete a county
      * @apiName DeleteCounty
      * @apiGroup County
      * @apiVersion 1.0.0

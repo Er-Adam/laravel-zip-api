@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class CityController extends Controller
 {
     /**
-     * @api {get} /api/city Get all cities
+     * @api {get} /city Get all cities
      * @apiName GetCities
      * @apiGroup City
      * @apiVersion 1.0.0
@@ -44,7 +44,7 @@ class CityController extends Controller
     }
 
     /**
-     * @api {post} /api/city Create a new city
+     * @api {post} /city Create a new city
      * @apiName CreateCity
      * @apiGroup City
      * @apiVersion 1.0.0
@@ -87,7 +87,7 @@ class CityController extends Controller
     }
 
     /**
-     * @api {get} /api/city/:id Get a specific city
+     * @api {get} /city/:id Get a specific city
      * @apiName GetCity
      * @apiGroup City
      * @apiVersion 1.0.0
@@ -123,7 +123,7 @@ class CityController extends Controller
     }
 
     /**
-     * @api {patch} /api/city/:id Update a city
+     * @api {patch} /city/:id Update a city
      * @apiName UpdateCity
      * @apiGroup City
      * @apiVersion 1.0.0
@@ -169,7 +169,7 @@ class CityController extends Controller
     }
 
     /**
-     * @api {delete} /api/city/:id Delete a city
+     * @api {delete} /city/:id Delete a city
      * @apiName DeleteCity
      * @apiGroup City
      * @apiVersion 1.0.0

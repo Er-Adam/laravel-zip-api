@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * @api {post} /api/login User login
+     * @api {post} /login User login
      * @apiName UserLogin
      * @apiGroup User
      * @apiVersion 1.0.0

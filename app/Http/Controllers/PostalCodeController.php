@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PostalCodeController extends Controller
 {
     /**
-     * @api {get} /api/postalcode Get all postal codes
+     * @api {get} /postalcode Get all postal codes
      * @apiName GetPostalCodes
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
@@ -44,7 +44,7 @@ class PostalCodeController extends Controller
     }
 
     /**
-     * @api {post} /api/postalcode Create a new postal code
+     * @api {post} /postalcode Create a new postal code
      * @apiName CreatePostalCode
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
@@ -87,7 +87,7 @@ class PostalCodeController extends Controller
     }
 
     /**
-     * @api {get} /api/postalcode/:id Get a specific postal code
+     * @api {get} /postalcode/:id Get a specific postal code
      * @apiName GetPostalCode
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
@@ -123,7 +123,7 @@ class PostalCodeController extends Controller
     }
 
     /**
-     * @api {patch} /api/postalcode/:id Update a postal code
+     * @api {patch} /postalcode/:id Update a postal code
      * @apiName UpdatePostalCode
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
@@ -150,7 +150,7 @@ class PostalCodeController extends Controller
      *         "id": 1,
      *         "postal_code": 1013,
      *         "city":{
-     *             "city_id": 2",
+     *             "id": 2",
      *             "name": "Rotterdam"
      *         }
      *       }
@@ -168,7 +168,7 @@ class PostalCodeController extends Controller
     }
 
     /**
-     * @api {delete} /api/postalcode/:id Delete a postal code
+     * @api {delete} /postalcode/:id Delete a postal code
      * @apiName DeletePostalCode
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
