@@ -28,7 +28,7 @@ class CityController extends Controller
      */
     public function store(CityRequest $request): JsonResponse
     {
-        $city = City::create($request->all());
+        $city = City::create($request->validated());
 
         return response()->json([
             "city" => $city,

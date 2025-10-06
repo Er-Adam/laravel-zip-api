@@ -26,7 +26,7 @@ class CountyController extends Controller
     }
 
     public function store(CountyRequest $request){
-        $county = County::create($request->all());
+        $county = County::create($request->validated());
 
         return response()->json([
             'county' => $county,
@@ -35,7 +35,7 @@ class CountyController extends Controller
 
     public function update(CountyRequest $request, $id){
         $county = County::findOrFail($id);
-        $county->update($request->all());
+        $county->update($request->validated());
 
         return response()->json([
             'county' => $county,

@@ -21,9 +21,16 @@ class CityRequest extends FormRequest
      */
     public function rules(): array
     {
+        if($this->isMethod('post')){
+            return [
+                "name" => "required|string|min:1|max:25",
+                "county_id" => "required|integer|exists:counties,id"
+            ];
+        }
+
         return [
-            "name" => "required|string|min:1|max:25",
-            "county_id" => "required|integer|exists:counties,id"
+            "name" => "string|min:1|max:25",
+            "county_id" => "integer|exists:counties,id"
         ];
     }
 }

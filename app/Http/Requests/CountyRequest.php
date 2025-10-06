@@ -21,8 +21,14 @@ class CountyRequest extends FormRequest
      */
     public function rules(): array
     {
+
+        if($this->isMethod('post')){
+            return [
+                "name" => "required|string|min:1|max:25"
+            ];
+        }
         return [
-            "name" => "required|string|min:1|max:25"
+            "name" => "string|min:1|max:25"
         ];
     }
 }
