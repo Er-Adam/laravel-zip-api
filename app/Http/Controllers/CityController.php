@@ -27,7 +27,6 @@ class CityController extends Controller
      *         {
      *           "id": 1,
      *           "name": "Amsterdam",
-     *           "county_id": 1,
      *           "county": {
      *             "id": 1,
      *             "name": "Noord-Holland"
@@ -50,8 +49,8 @@ class CityController extends Controller
      * @apiGroup City
      * @apiVersion 1.0.0
      *
-     * @apiParam {String} name City name (required)
-     * @apiParam {Number} county_id County ID (required)
+     * @apiParam (body) {String} name City name (required)
+     * @apiParam (body) {Number} county_id County ID (required)
      *
      * @apiParamExample {json} Request-Example:
      *     {
@@ -124,14 +123,14 @@ class CityController extends Controller
     }
 
     /**
-     * @api {put} /api/city/:id Update a city
+     * @api {patch} /api/city/:id Update a city
      * @apiName UpdateCity
      * @apiGroup City
      * @apiVersion 1.0.0
      *
      * @apiParam {Number} id City ID
-     * @apiParam {String} [name] City name
-     * @apiParam {Number} [county_id] County ID
+     * @apiParam (body) {String} [name] City name
+     * @apiParam (body) {Number} [county_id] County ID
      *
      * @apiParamExample {json} Request-Example:
      *     {

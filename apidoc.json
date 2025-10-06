@@ -1,0 +1,7 @@
+{
+    "name": "Laravel Zip API",
+    "version": "1.0.0",
+    "description": "API documentation for my Laravel project",
+    "title": "My Laravel API Docs",
+    "url": "http://localhost:8000/api"
+}

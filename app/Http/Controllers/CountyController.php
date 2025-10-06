@@ -73,7 +73,7 @@ class CountyController extends Controller
      * @apiGroup County
      * @apiVersion 1.0.0
      *
-     * @apiParam {String} name County name (required)
+     * @apiParam (body) {String} name County name (required)
      *
      * @apiParamExample {json} Request-Example:
      *     {
@@ -102,13 +102,13 @@ class CountyController extends Controller
     }
 
     /**
-     * @api {put} /api/county/:id Update a county
+     * @api {patch} /api/county/:id Update a county
      * @apiName UpdateCounty
      * @apiGroup County
      * @apiVersion 1.0.0
      *
      * @apiParam {Number} id County ID
-     * @apiParam {String} [name] County name
+     * @apiParam (body) {String} [name] County name
      *
      * @apiParamExample {json} Request-Example:
      *     {

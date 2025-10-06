@@ -49,8 +49,8 @@ class PostalCodeController extends Controller
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
      *
-     * @apiParam {Number} code Postal code (required)
-     * @apiParam {Number} city_id City ID (required)
+     * @apiParam (body) {Number} code Postal code (required)
+     * @apiParam (body) {Number} city_id City ID (required)
      *
      * @apiParamExample {json} Request-Example:
      *     {
@@ -123,14 +123,14 @@ class PostalCodeController extends Controller
     }
 
     /**
-     * @api {put} /api/postalcode/:id Update a postal code
+     * @api {patch} /api/postalcode/:id Update a postal code
      * @apiName UpdatePostalCode
      * @apiGroup PostalCode
      * @apiVersion 1.0.0
      *
      * @apiParam {Number} id Postal code ID
-     * @apiParam {Number} [postal_code] Postal code
-     * @apiParam {Number} [city_id] City ID
+     * @apiParam (body) {Number} [postal_code] Postal code
+     * @apiParam (body) {Number} [city_id] City ID
      *
      * @apiParamExample {json} Request-Example:
      *     {
