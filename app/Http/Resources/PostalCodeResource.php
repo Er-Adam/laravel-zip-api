@@ -15,9 +15,8 @@ class PostalCodeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'          => $this->id,
+            'id' => $this->id,
             'postal_code' => $this->postal_code,
-//            'city'        => $this->city ? new CityResource($this->city) : null,
         ];
     }
 }

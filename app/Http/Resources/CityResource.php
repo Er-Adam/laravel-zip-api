@@ -15,9 +15,8 @@ class CityResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'          => $this->id,
-            'name'        => $this->name,
-            //'county'      => $this->county ? new CountyResource($this->county) : null,
+            'id' => $this->id,
+            'name' => $this->name,
         ];
     }
 }

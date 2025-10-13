@@ -7,7 +7,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-
 Route::get("/county/{countyId}/city", [CityController::class, "indexWithCounty"]);
 Route::get("/county/{countyId}/city/{cityId}", [CityController::class, "showWithCounty"]);
 Route::get("/county/{countyId}/abc", [CityController::class, "indexWithCountyAbc"]);

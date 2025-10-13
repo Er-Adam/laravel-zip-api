@@ -93,7 +93,8 @@ class CountyController extends Controller
      *       }
      *     }
      */
-    public function store(CountyRequest $request){
+    public function store(CountyRequest $request): JsonResponse
+    {
         $county = County::create($request->validated());
 
         return response()->json([
@@ -129,7 +130,8 @@ class CountyController extends Controller
      *       }
      *     }
      */
-    public function update(CountyRequest $request, $id){
+    public function update(CountyRequest $request, $id): JsonResponse
+    {
         $county = County::findOrFail($id);
         $county->update($request->validated());
 
@@ -156,7 +158,8 @@ class CountyController extends Controller
      *       "id": 1
      *     }
      */
-    public function destroy($id){
+    public function destroy($id): JsonResponse
+    {
         $county = County::findOrFail($id);
         $county->delete();
 

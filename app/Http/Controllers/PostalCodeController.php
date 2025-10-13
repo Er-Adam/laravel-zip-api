@@ -20,7 +20,6 @@ class PostalCodeController extends Controller
      * @apiSuccess {Object[]} postalCodes List of postal codes
      * @apiSuccess {Number} postalCodes.id Postal code ID
      * @apiSuccess {String} postalCodes.postal_code Postal code
-     * @apiSuccess {Object} postalCodes.city City information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -29,15 +28,11 @@ class PostalCodeController extends Controller
      *         {
      *           "id": 1,
      *           "postal_code": 1012,
-     *           "city": {
-     *             "id": 1,
-     *             "name": "Amsterdam"
-     *           }
      *         }
      *       ]
      *     }
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $postalCodes = PostalCodeResource::collection(PostalCode::with('city')->get());
         return response()->json([
@@ -69,7 +64,7 @@ class PostalCodeController extends Controller
      *       ]
      *     }
      */
-    public function indexWithCity(string $countyId, string $cityId) : JsonResponse
+    public function indexWithCity(string $countyId, string $cityId): JsonResponse
     {
         $city = City::where('id', $cityId)->where('county_id', $countyId)->first();
 
@@ -99,7 +94,6 @@ class PostalCodeController extends Controller
      * @apiSuccess {Object} postalcode Created postal code
      * @apiSuccess {Number} postalcode.id Postal code ID
      * @apiSuccess {Number} postalcode.postal_code Postal code
-     * @apiSuccess {Number} postalcode.city City information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -107,14 +101,10 @@ class PostalCodeController extends Controller
      *       "postalcode": {
      *         "id": 1,
      *         "postal_code": 1012,
-     *         "city":{
-     *           "id": 1,
-     *           "name": "Amsterdam"
-     *         }
      *       }
      *     }
      */
-    public function store(PostalCodeRequest $request)
+    public function store(PostalCodeRequest $request): JsonResponse
     {
         $postalcode = PostalCode::create($request->validated());
         $postalcodeResource = new PostalCodeResource($postalcode);
@@ -135,7 +125,6 @@ class PostalCodeController extends Controller
      * @apiSuccess {Object} postalcode Postal code information
      * @apiSuccess {Number} postalcode.id Postal code ID
      * @apiSuccess {Number} postalcode.postal_code Postal code
-     * @apiSuccess {Object} postalcode.city City information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -143,14 +132,10 @@ class PostalCodeController extends Controller
      *       "postalcode": {
      *         "id": 1,
      *         "postal_code": 1012,
-     *         "city": {
-     *           "id": 1,
-     *           "name": "Amsterdam"
-     *         }
      *       }
      *     }
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
         $postalcode = PostalCode::where('id', $id)->with('city')->first();
         $postalcodeResource = new PostalCodeResource($postalcode);
@@ -183,7 +168,8 @@ class PostalCodeController extends Controller
      *       }
      *     }
      */
-    public function showWithCity(string $countyId, string $cityId, string $postalcodeId): JsonResponse{
+    public function showWithCity(string $countyId, string $cityId, string $postalcodeId): JsonResponse
+    {
         $city = City::where('id', $cityId)->where('county_id', $countyId)->first();
 
         $postalcode = PostalCode::where('id', $postalcodeId)->where('city_id', $city->id)->first();
@@ -213,7 +199,6 @@ class PostalCodeController extends Controller
      * @apiSuccess {Object} postalcode Updated postal code
      * @apiSuccess {Number} postalcode.id Postal code ID
      * @apiSuccess {Number} postalcode.postal_code Postal code
-     * @apiSuccess {Number} postalcode.city City information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -221,14 +206,10 @@ class PostalCodeController extends Controller
      *       "postalcode": {
      *         "id": 1,
      *         "postal_code": 1013,
-     *         "city":{
-     *             "id": 2",
-     *             "name": "Rotterdam"
-     *         }
      *       }
      *     }
      */
-    public function update(PostalCodeRequest $request, string $id)
+    public function update(PostalCodeRequest $request, string $id): JsonResponse
     {
         $postalcode = PostalCode::findOrFail($id);
         $postalcode->update($request->validated());
@@ -257,7 +238,7 @@ class PostalCodeController extends Controller
      *       "id": 1
      *     }
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         $postalcode = PostalCode::findOrFail($id);
         $postalcode->delete();

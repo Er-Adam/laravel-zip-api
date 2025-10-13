@@ -18,7 +18,6 @@ class CityController extends Controller
      * @apiSuccess {Object[]} cities List of cities
      * @apiSuccess {Number} cities.id City ID
      * @apiSuccess {String} cities.name City name
-     * @apiSuccess {Object} cities.county County information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -27,10 +26,6 @@ class CityController extends Controller
      *         {
      *           "id": 1,
      *           "name": "Amsterdam",
-     *           "county": {
-     *             "id": 1,
-     *             "name": "Noord-Holland"
-     *           }
      *         }
      *       ]
      *     }
@@ -66,7 +61,8 @@ class CityController extends Controller
      *       ]
      *     }
      */
-    public function indexWithCounty(string $countyId): JsonResponse{
+    public function indexWithCounty(string $countyId): JsonResponse
+    {
         $cities = City::where('county_id', $countyId)->get();
         $cityResources = CityResource::collection($cities);
 
@@ -95,7 +91,8 @@ class CityController extends Controller
      *       ]
      *     }
      */
-    public function indexWithCountyAbc(string $countyId): JsonResponse{
+    public function indexWithCountyAbc(string $countyId): JsonResponse
+    {
         $abc = City::where('county_id', $countyId)
             ->selectRaw("UPPER(SUBSTRING(name, 1, 1)) as initial")
             ->distinct()
@@ -125,7 +122,6 @@ class CityController extends Controller
      * @apiSuccess {Object} city Created city
      * @apiSuccess {Number} city.id City ID
      * @apiSuccess {String} city.name City name
-     * @apiSuccess {Object} city.county County information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -133,10 +129,6 @@ class CityController extends Controller
      *       "city": {
      *         "id": 1,
      *         "name": "Amsterdam",
-     *         "county": {
-     *           "id": 1,
-     *           "name": "Noord-Holland"
-     *         }
      *       }
      *     }
      */
@@ -161,7 +153,6 @@ class CityController extends Controller
      * @apiSuccess {Object} city City information
      * @apiSuccess {Number} city.id City ID
      * @apiSuccess {String} city.name City name
-     * @apiSuccess {Object} city.county County information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -169,10 +160,6 @@ class CityController extends Controller
      *       "city": {
      *         "id": 1,
      *         "name": "Amsterdam",
-     *         "county": {
-     *           "id": 1,
-     *           "name": "Noord-Holland"
-     *         }
      *       }
      *     }
      */
@@ -208,7 +195,8 @@ class CityController extends Controller
      *       }
      *     }
      */
-    public function showWithCounty(string $countyId, string $cityId): JsonResponse{
+    public function showWithCounty(string $countyId, string $cityId): JsonResponse
+    {
         $city = City::where('id', $cityId)->where('county_id', $countyId)->first();
         $cityResource = new CityResource($city, true);
 
@@ -239,7 +227,8 @@ class CityController extends Controller
      *       }
      *     }
      */
-    public function showWithCountyByAbc(string $countyId, string $initial) : JsonResponse{
+    public function showWithCountyByAbc(string $countyId, string $initial): JsonResponse
+    {
         $cities = City::where('county_id', $countyId)
             ->whereRaw('UPPER(LEFT(name, 1)) = ?', [strtoupper($initial)])
             ->orderBy('name')
@@ -271,7 +260,6 @@ class CityController extends Controller
      * @apiSuccess {Object} city Updated city
      * @apiSuccess {Number} city.id City ID
      * @apiSuccess {String} city.name City name
-     * @apiSuccess {Object} city.county County information
      *
      * @apiSuccessExample {json} Success-Response:
      *     HTTP/1.1 200 OK
@@ -279,10 +267,6 @@ class CityController extends Controller
      *       "city": {
      *         "id": 1,
      *         "name": "Rotterdam",
-     *         "county": {
-     *            "id": 2,
-     *            "name": "Noord-Holland"
-     *          }
      *       }
      *     }
      */
@@ -315,7 +299,7 @@ class CityController extends Controller
      *       "id": 1
      *     }
      */
-    public function destroy(string $id)
+    public function destroy(string $id): JsonResponse
     {
         $city = City::findOrFail($id);
         $city->delete();
