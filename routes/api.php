@@ -6,9 +6,15 @@ use App\Http\Controllers\PostalCodeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/user', function (Request $request) {
-//    return $request->user();
-//})->middleware('auth:sanctum');
+
+
+Route::get("/county/{countyId}/city", [CityController::class, "indexWithCounty"]);
+Route::get("/county/{countyId}/city/{cityId}", [CityController::class, "showWithCounty"]);
+Route::get("/county/{countyId}/abc", [CityController::class, "indexWithCountyAbc"]);
+Route::get("/county/{countyId}/abc/{initial}", [CityController::class, "showWithCountyByAbc"]);
+
+Route::get("county/{countyId}/city/{cityId}/postalcode", [PostalCodeController::class, "indexWithCity"]);
+Route::get("county/{countyId}/city/{cityId}/postalcode/{postalcodeId}", [PostalCodeController::class, "showWithCity"]);
 
 
 Route::get("/county", [CountyController::class, "index"]);

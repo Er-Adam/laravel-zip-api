@@ -17,7 +17,7 @@ class CityResource extends JsonResource
         return [
             'id'          => $this->id,
             'name'        => $this->name,
-            'county'      => $this->county ? new CountyResource($this->county) : null,
+            //'county'      => $this->county ? new CountyResource($this->county) : null,
         ];
     }
 }

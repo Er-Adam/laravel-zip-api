@@ -17,7 +17,7 @@ class PostalCodeResource extends JsonResource
         return [
             'id'          => $this->id,
             'postal_code' => $this->postal_code,
-            'city'        => $this->city ? new CityResource($this->city) : null,
+//            'city'        => $this->city ? new CityResource($this->city) : null,
         ];
     }
 }

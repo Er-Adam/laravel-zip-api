@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostalCodeRequest;
 use App\Http\Resources\PostalCodeResource;
+use App\Models\City;
 use App\Models\PostalCode;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PostalCodeController extends Controller
@@ -40,6 +42,42 @@ class PostalCodeController extends Controller
         $postalCodes = PostalCodeResource::collection(PostalCode::with('city')->get());
         return response()->json([
             "postalCodes" => $postalCodes,
+        ]);
+    }
+
+    /**
+     * @api {get} county/:countyId/city/:cityId/postalcode Get all postal codes
+     * @apiName GetPostalCode
+     * @apiGroup PostalCode
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Number} countyId County ID
+     * @apiParam {Number} cityId City ID
+     *
+     * @apiSuccess {Object} postalcode Postal code information
+     * @apiSuccess {Number} postalcode.id Postal code ID
+     * @apiSuccess {Number} postalcode.postal_code Postal code
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "postalCodes": [
+     *         {
+     *           "id": 1,
+     *           "postal_code": 1012,
+     *         }
+     *       ]
+     *     }
+     */
+    public function indexWithCity(string $countyId, string $cityId) : JsonResponse
+    {
+        $city = City::where('id', $cityId)->where('county_id', $countyId)->first();
+
+        $postalcode = PostalCode::where('city_id', $city->id)->get();
+        $postalcodeResource = PostalCodeResource::collection($postalcode);
+
+        return response()->json([
+            "postalcodes" => $postalcodeResource,
         ]);
     }
 
@@ -115,6 +153,40 @@ class PostalCodeController extends Controller
     public function show(string $id)
     {
         $postalcode = PostalCode::where('id', $id)->with('city')->first();
+        $postalcodeResource = new PostalCodeResource($postalcode);
+
+        return response()->json([
+            "postalcode" => $postalcodeResource,
+        ]);
+    }
+
+    /**
+     * @api {get} county/:countyId/city/:cityId/postalcode/:id Get a specific postal code
+     * @apiName GetPostalCode
+     * @apiGroup PostalCode
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Number} countyId County ID
+     * @apiParam {Number} cityId City ID
+     * @apiParam {Number} id Postal code ID
+     *
+     * @apiSuccess {Object} postalcode Postal code information
+     * @apiSuccess {Number} postalcode.id Postal code ID
+     * @apiSuccess {Number} postalcode.postal_code Postal code
+     *
+     * @apiSuccessExample {json} Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "postalcode": {
+     *         "id": 1,
+     *         "postal_code": 1012,
+     *       }
+     *     }
+     */
+    public function showWithCity(string $countyId, string $cityId, string $postalcodeId): JsonResponse{
+        $city = City::where('id', $cityId)->where('county_id', $countyId)->first();
+
+        $postalcode = PostalCode::where('id', $postalcodeId)->where('city_id', $city->id)->first();
         $postalcodeResource = new PostalCodeResource($postalcode);
 
         return response()->json([
