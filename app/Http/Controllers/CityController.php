@@ -230,7 +230,7 @@ class CityController extends Controller
     public function showWithCountyByAbc(string $countyId, string $initial): JsonResponse
     {
         $cities = City::where('county_id', $countyId)
-            ->whereRaw('UPPER(LEFT(name, 1)) = ?', [strtoupper($initial)])
+            ->whereRaw('UPPER(substr(name, 1, 1)) = ?', [strtoupper($initial)])
             ->orderBy('name')
             ->get(['id', 'name']);
         $cityResources = CityResource::collection($cities);
