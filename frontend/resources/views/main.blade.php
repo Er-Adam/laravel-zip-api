@@ -20,11 +20,24 @@
     @if(session('initial'))
         <br>
         <x-city-with-initial countyId="{{ session('countyId') }}" initial="{{ session('initial') }}"/>
-
-        @if(session('cityId'))
-            <br>
-            <x-city-postal-codes countyId="{{ session('countyId') }}" cityId="{{ session('cityId') }}"/>
-        @endif
     @endif
 @endif
 </body>
+<script>
+    function togglePostalCodes(cityId){
+        const elements = document.querySelectorAll('.postalcode-' + cityId);
+        elements.forEach(element => element.classList.toggle('hidden'));
+
+
+        const btn = document.getElementById(cityId);
+        if(btn.innerHTML === '+'){
+            btn.innerHTML = '-';
+        }
+        else{
+            btn.innerHTML = '+';
+        }
+    }
+</script>
+<style>
+    .hidden { display: none; }
+</style>

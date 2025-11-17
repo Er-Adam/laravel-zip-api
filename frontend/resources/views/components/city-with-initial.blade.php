@@ -1,4 +1,11 @@
 @foreach($cities as $city)
-    <a href="{{url('/city?cityId=' . $city['id'])}}">{{$city['name']}}</a>
-    <br>
+    <div>
+        <button id="{{ $city['id'] }}" onclick="togglePostalCodes(id)" style="display: inline">+</button>
+        <p style="display: inline">{{ $city['name'] }}</p>
+        <ul>
+            @foreach($postalCodes[$city['id']] as $postalCode)
+                <li class="{{ 'postalcode-'.$city['id'] }} hidden">{{ $postalCode['postal_code'] }}</li>
+            @endforeach
+        </ul>
+    </div>
 @endforeach

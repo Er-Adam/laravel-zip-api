@@ -21,7 +21,6 @@ Route::get("/county-abc", function (Request $request) {
 
     session(['countyId' => $countyId]);
     session()->forget('initial');
-    session()->forget('cityId');
 
     return redirect('/')
         ->with('redirect', true);
@@ -31,16 +30,6 @@ Route::get('/county-initial', function (Request $request) {
     $initial = $request->query('initial');
 
     session(['initial' => $initial]);
-    session()->forget('cityId');
-
-    return redirect('/')
-        ->with('redirect', true);
-});
-
-Route::get('/city', function (Request $request) {
-    $cityId = $request->query('cityId');
-
-    session(['cityId' => $cityId]);
 
     return redirect('/')
         ->with('redirect', true);
