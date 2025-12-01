@@ -1,5 +1,5 @@
-@isAuth
-    <div>
+<div>
+    @isAuth
         @if (!$isEdit)
             <div style="display: inline">{{ $name }}</div>
             <form action="{{ route('start-edit') }}" method="post">
@@ -22,13 +22,20 @@
             </form>
         @endif
 
-        @if (session()->has('token'))
-            <form action="{{ route('delete') }}" method="post">
-                @csrf
-                <input type="hidden" name="id" value="{{ $id }}">
-                <input type="hidden" name="type" value="county">
-                <input type="submit" value="Delete">
-            </form>
-        @endif
-    </div>
-@endif
+        <form action="{{ route('delete') }}" method="post">
+            @csrf
+            <input type="hidden" name="id" value="{{ $id }}">
+            <input type="hidden" name="type" value="county">
+            <input type="submit" value="Delete">
+        </form>
+    @else
+        <div style="display: inline">{{ $name }}</div>
+    @endif
+
+    <form action="{{ route('download') }}" method="post" style="display: inline">
+        @csrf
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="type" value="county">
+        <input type="submit" value="Download">
+    </form>
+</div>

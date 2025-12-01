@@ -9,10 +9,13 @@ use Illuminate\View\Component;
 
 class CityWithInitial extends Component
 {
+    public $countyId;
     public $cities;
     public array $postalCodes;
     public function __construct($countyId = 1, $initial = 'A')
     {
+        $this->countyId = $countyId;
+
         $res = Http::api()->get("/county/$countyId/abc/$initial");
         $this->cities = $res->json('cities');
 

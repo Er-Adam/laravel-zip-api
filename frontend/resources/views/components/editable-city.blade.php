@@ -38,6 +38,13 @@
         <div style="display: inline">{{ $name }}</div>
     @endif
 
+    <form action="{{ route('download') }}" method="post" style="display: inline">
+        @csrf
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="countyId" value="{{ $countyId }}">
+        <input type="hidden" name="type" value="city">
+        <input type="submit" value="Download">
+    </form>
     <div class="hidden" id="hidden-{{ $id }}">
         <ul>
             @foreach($postalCodes as $postalCode)

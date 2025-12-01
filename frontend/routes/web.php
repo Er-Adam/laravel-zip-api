@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 Route::get('/', function () {
 
@@ -60,6 +61,63 @@ Route::post('delete', function (Request $request) {
         ->with('redirect', true);
 })
     ->name('delete');
+
+Route::post('download', function (Request $request) {
+    if ($request->post('type') === null || $request->post('id') === null) {
+        return redirect('/')
+            ->with('redirect', true);
+    }
+
+    $id = $request->post('id');
+    $data = null;
+
+    switch ($request->post('type')) {
+        case 'city':
+            $cityName = Http::api()->get("city/$id")->json('city.name');
+            $filename = "$cityName.csv";
+            $countyId = $request->post('countyId');
+            $postalcodes = Http::api()->get("county/$countyId/city/$id/postalcode")->json('postalcodes');
+            $data = [
+                ['PostalCodeId', 'PostalCode']
+            ];
+            foreach ($postalcodes as $postalcode) {
+                $data[] = [$postalcode['id'], $postalcode['postal_code']];
+            }
+            break;
+        case 'county':
+            $countyName = Http::api()->get("county/$id")->json('county.name');
+            $filename = "$countyName.csv";
+            $cities = Http::api()->get("county/$id/city")->json('cities');
+            $data = [
+                ['CityId', 'CityName']
+            ];
+            foreach ($cities as $city) {
+                $data[] = [$city['id'], $city['name']];
+            }
+            break;
+        default:
+            return redirect('/')
+                ->with('redirect', true);
+    }
+
+    $response = new StreamedResponse(function () use ($data) {
+        $handle = fopen('php://output', 'w');
+
+        foreach ($data as $row) {
+            fputcsv($handle, $row);
+        }
+
+        fclose($handle);
+    });
+
+    $response->headers->set('Content-Type', 'text/csv');
+    $response->headers->set('Content-Disposition', 'attachment; filename="' . $filename . '"');
+
+    return $response;
+//    return redirect('/')
+//        ->with('redirect', true);
+})
+    ->name('download');
 
 
 Route::post('start-edit', function (Request $request) {

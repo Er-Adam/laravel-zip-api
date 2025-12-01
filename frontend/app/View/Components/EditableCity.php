@@ -9,14 +9,16 @@ use Illuminate\View\Component;
 
 class EditableCity extends Component
 {
+    public string $countyId;
     public string $id;
     public string $name;
     public array $postalCodes;
     public bool $isEdit = false;
     public bool $isAdd = false;
 
-    public function __construct(string $id, string $name, array $postalCodes)
+    public function __construct(string $countyId, string $id, string $name, array $postalCodes)
     {
+        $this->countyId = $countyId;
         $this->id = $id;
         $this->name = $name;
         $this->postalCodes = $postalCodes;
