@@ -45,6 +45,20 @@
         <input type="hidden" name="type" value="city">
         <input type="submit" value="Download">
     </form>
+    <form action="{{ route('download-pdf') }}" method="post" style="display: inline">
+        @csrf
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="countyId" value="{{ $countyId }}">
+        <input type="hidden" name="type" value="city">
+        <input type="submit" value="Download PDF">
+    </form>
+    <form action="{{ route('send-mail') }}" method="post" style="display: inline">
+        @csrf
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="countyId" value="{{ $countyId }}">
+        <input type="hidden" name="type" value="city">
+        <input type="submit" value="Send email">
+    </form>
     <div class="hidden" id="hidden-{{ $id }}">
         <ul>
             @foreach($postalCodes as $postalCode)

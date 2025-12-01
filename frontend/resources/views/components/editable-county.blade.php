@@ -38,4 +38,16 @@
         <input type="hidden" name="type" value="county">
         <input type="submit" value="Download">
     </form>
+    <form action="{{ route('download-pdf') }}" method="post" style="display: inline">
+        @csrf
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="type" value="county">
+        <input type="submit" value="Download PDF">
+    </form>
+    <form action="{{ route('send-mail') }}" method="post" style="display: inline">
+        @csrf
+        <input type="hidden" name="id" value="{{ $id }}">
+        <input type="hidden" name="type" value="county">
+        <input type="submit" value="Send email">
+    </form>
 </div>
