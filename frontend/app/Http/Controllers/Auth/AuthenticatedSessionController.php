@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -28,10 +29,8 @@ class AuthenticatedSessionController extends Controller
             $token = $response['token'];
             $user = $response['user'];
 
-//            Auth::login($user);
-
             session([
-                'api_token' => $token,
+                'token' => $token,
                 'user_name' => $user['name'],
                 'user_email' => $user['email'],
             ]);
@@ -42,8 +41,6 @@ class AuthenticatedSessionController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-//        Auth::logout();
-
         $request->session()->forget(['api_token', 'user_name', 'user_email']);
         $request->session()->invalidate();
         $request->session()->regenerateToken();

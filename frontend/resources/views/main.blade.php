@@ -14,6 +14,7 @@
 <br>
 
 @if(session('countyId'))
+    <x-editable-county id="{{ session('countyId') }}"/>
     <x-initial-selector countyId="{{ session('countyId') }}"/>
     <br>
 
@@ -23,21 +24,23 @@
     @endif
 @endif
 </body>
+
 <script>
     function togglePostalCodes(cityId){
-        const elements = document.querySelectorAll('.postalcode-' + cityId);
-        elements.forEach(element => element.classList.toggle('hidden'));
-
+        document.getElementById('hidden-' + cityId).classList.toggle('hidden');
 
         const btn = document.getElementById(cityId);
-        if(btn.innerHTML === '+'){
-            btn.innerHTML = '-';
+        if(btn.innerHTML === 'v'){
+            btn.innerHTML = '^';
         }
         else{
-            btn.innerHTML = '+';
+            btn.innerHTML = 'v';
         }
     }
 </script>
 <style>
     .hidden { display: none; }
+    form{
+        display: inline;
+    }
 </style>

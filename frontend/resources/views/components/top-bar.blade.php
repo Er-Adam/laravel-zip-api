@@ -9,7 +9,7 @@
     </h3>
 
     <div>
-        @if(session()->has('api_token'))
+        @isAuth
             <span>Bejelentkezve mint <strong>{{ session()->get('user_name') }}</strong></span>
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
