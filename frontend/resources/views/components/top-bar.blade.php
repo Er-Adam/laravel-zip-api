@@ -10,13 +10,13 @@
 
     <div>
         @isAuth
-            <span>Bejelentkezve mint <strong>{{ session()->get('user_name') }}</strong></span>
+            <span>Logged in as <strong>{{ session()->get('user_name') }}</strong></span>
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
-                <button type="submit" style="margin-left:10px;">Kijelentkezés</button>
+                <button type="submit" style="margin-left:10px;">Log out</button>
             </form>
         @else
-            <a href="{{ url('/login') }}">Bejelentkezés</a>
+            <a href="{{ url('/login') }}">Log in</a>
         @endif
     </div>
 </div>

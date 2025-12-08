@@ -6,7 +6,7 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ $id }}">
                 <input type="hidden" name="type" value="postalcode">
-                <input type="submit" value="Edit">
+                <input class="btn edit" type="submit" value="Edit">
             </form>
         @else
             <form action="{{ route('end-edit') }}" method="post">
@@ -15,20 +15,20 @@
                        style="display: inline">
                 <input type="hidden" name="id" value="{{ $id }}">
                 <input type="hidden" name="type" value="postalcode">
-                <input type="submit" value="Confirm Edit">
+                <input class="btn edit" type="submit" value="Confirm Edit">
             </form>
             <form action="{{ route('stop-edit') }}" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $id }}">
                 <input type="hidden" name="type" value="postalcode">
-                <input type="submit" value="Cancel Edit">
+                <input class="btn edit" type="submit" value="Cancel Edit">
             </form>
         @endif
         <form action="{{ route('delete') }}" method="post">
             @csrf
             <input type="hidden" name="id" value="{{ $id }}">
             <input type="hidden" name="type" value="postalcode">
-            <input type="submit" value="Delete">
+            <input class="btn delete" type="submit" value="Delete">
         </form>
     @else
         <div>{{ $postalCode }}</div>

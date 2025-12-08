@@ -41,7 +41,7 @@ class EditableCity extends Component
     private function checkIsAdd(): bool
     {
         return Http::isAuth() &&
-            session()->get('add_type') === "city" &&
+            session()->get('add_type') === "postalcode" &&
             session()->get('add_id') === $this->id;
     }
 }

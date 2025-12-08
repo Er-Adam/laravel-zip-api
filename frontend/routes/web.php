@@ -205,7 +205,7 @@ Route::post('send-mail', function (Request $request) {
                 ->with('redirect', true);
     }
 
-    Mail::to(session()->get("user_email"))->send(new DataMail($subjectType,[
+    Mail::to(session()->get("user_email"))->send(new DataMail($subjectType, [
         'title' => $title,
         'data' => $data
     ]));
@@ -298,11 +298,25 @@ Route::post('end-add', function (Request $request) {
     $value = $request->post('value');
 
     switch ($type) {
-        case 'city':
+        case 'postalcode':
             Http::apiWithToken()->post("/postalcode/", [
                 'postal_code' => $value,
                 'city_id' => $id
             ]);
+            break;
+        case 'city':
+            Http::apiWithToken()->post("/city/", [
+                'name' => $value,
+                'county_id' => $id
+            ]);
+            break;
+        case 'county':
+            $res = Http::apiWithToken()->post("/county/", [
+                'name' => $value,
+            ]);
+
+            $countyId = $res->json('county.id');
+            session(['countyId' => $countyId]);
             break;
     }
 

@@ -11,10 +11,13 @@
 <x-top-bar/>
 
 <x-county-selector/>
+
+<x-county-adder/>
 <br>
 
 @if(session('countyId'))
     <x-editable-county id="{{ session('countyId') }}"/>
+    <x-city-adder countyId="{{ session('countyId') }}"/>
     <x-initial-selector countyId="{{ session('countyId') }}"/>
     <br>
 
@@ -26,21 +29,64 @@
 </body>
 
 <script>
-    function togglePostalCodes(cityId){
+    function togglePostalCodes(cityId) {
         document.getElementById('hidden-' + cityId).classList.toggle('hidden');
 
         const btn = document.getElementById(cityId);
-        if(btn.innerHTML === 'v'){
+        if (btn.innerHTML === 'v') {
             btn.innerHTML = '^';
-        }
-        else{
+        } else {
             btn.innerHTML = 'v';
         }
     }
 </script>
 <style>
-    .hidden { display: none; }
-    form{
+    .hidden {
+        display: none;
+    }
+
+    form {
         display: inline;
     }
+
+    .btn {
+        padding: .5rem;
+        margin-right: .25rem;
+        margin-left: .25rem;
+
+        border: 1px solid black;
+        border-radius: .5rem;
+    }
+
+    .btn:hover {
+        transition: 0.2s;
+        background-color: lightgray;
+    }
+
+    .btn.delete {
+        background-color: orangered;
+        color: black;
+    }
+
+    .btn.delete:hover {
+        background-color: orange;
+    }
+
+    .btn.edit {
+        background-color: #41a1ff;
+        color: black;
+    }
+
+    .btn.edit:hover {
+        background-color: deepskyblue;
+    }
+
+    .btn.download {
+        background-color: limegreen;
+    }
+
+    .btn.download:hover {
+        background-color: lime;
+    }
+
 </style>
