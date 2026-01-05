@@ -38,12 +38,12 @@
             <div style="display: inline">{{ $name }}</div>
         @endif
 
-        <form action="{{ route('download') }}" method="post" style="display: inline">
+        <form action="{{ route('download-csv') }}" method="post" style="display: inline">
             @csrf
             <input type="hidden" name="id" value="{{ $id }}">
             <input type="hidden" name="countyId" value="{{ $countyId }}">
             <input type="hidden" name="type" value="city">
-            <input class="btn download" type="submit" value="Download">
+            <input class="btn download" type="submit" value="Download CSV">
         </form>
         <form action="{{ route('download-pdf') }}" method="post" style="display: inline">
             @csrf
