@@ -19,7 +19,7 @@
         @csrf
         <input hidden name="county_id" value="{{ $county->id }}">
         <input hidden name="initial" value="{{ $initial }}">
-        <input type="email" required name="email">
+        <input type="email" placeholder="email" required name="email">
         <button>Send mail</button>
     </form>
 </div>
