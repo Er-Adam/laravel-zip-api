@@ -15,18 +15,10 @@
         <nav>
             <ul>
                 <li>
-                    <button>
-                        <a href="{{ route('abc-first') }}">ABC</a>
-                    </button>
-                    <button>
-                        <a href="{{ route('county.index') }}">Megyék</a>
-                    </button>
-                    <button>
-                        <a href="{{ route('city.index') }}">Városok</a>
-                    </button>
-                    <button>
-                        <a href="{{ route('postalcode.index') }}">Zipkódok</a>
-                    </button>
+                    <a href="{{ route('abc-first') }}"><button>ABC </button></a>
+                    <a href="{{ route('county.index') }}"><button>Megyék </button> </a> 
+                    <a href="{{ route('city.index') }}"><button>Városok </button> </a>
+                    <a href="{{ route('postalcode.index') }}"><button>Zipkódok </button></a>
                 </li>
             </ul>
         </nav>

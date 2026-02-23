@@ -34,7 +34,6 @@ class DownloadController extends Controller
             $file = fopen('php://output', 'w');
 
 
-            // Header row
             fputcsv($file, ['County', 'City', 'Postal Codes']);
 
             foreach ($cities as $city) {
