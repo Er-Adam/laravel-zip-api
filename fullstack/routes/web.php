@@ -6,6 +6,7 @@ use App\Http\Controllers\CountyController;
 use App\Http\Controllers\PostalCodeController;
 use App\Http\Controllers\AbcController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return redirect('/abc');
@@ -19,6 +20,9 @@ Route::get('abc/delete', [AbcController::class, 'deleteCity'])->name('abc-delete
 Route::get('download/csv', [DownloadController::class, 'downloadCsv'])->name('download-csv');
 Route::get('download/pdf', [DownloadController::class, 'downloadPdf'])->name('download-pdf');
 Route::post('send/email', [DownloadController::class, 'sendEmail'])->name('send-email');
+
+Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::get('login/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('county', CountyController::class);
 Route::resource('city', CityController::class);

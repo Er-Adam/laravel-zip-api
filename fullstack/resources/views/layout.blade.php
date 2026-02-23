@@ -21,6 +21,13 @@
                     <a href="{{ route('postalcode.index') }}"><button>Zipkódok </button></a>
                 </li>
             </ul>
+            @if(session()->has('user'))
+            <div>Logged in as {{session()->get('user')}}</div>
+            <a href="{{ route('logout') }}">Log out</a>
+            @else
+            <div>Not logged in</div>
+            <a href="{{ route('login') }}">Log in</a>
+            @endif
         </nav>
     </header>
     <main>

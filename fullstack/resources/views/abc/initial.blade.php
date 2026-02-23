@@ -2,7 +2,9 @@
 @section('content')
 <div class="title-bar">
     <h1>Városok</h1>
+    @if(session()->has('user'))
     <a href="{{ route('city.create') }}">Új hozzáadása</a>
+    @endif
     <form action="{{ route('download-csv') }}">
         <input hidden name="county_id" value="{{ $county->id }}">
         <input hidden name="initial" value="{{ $initial }}">
@@ -35,12 +37,14 @@
     <li class="actions">
         {{ $city->name }}
         <a href="{{ route('city.show', $city->id) }}" class="button">Megjeneítés</a>
+        @if(session()->has('user'))
         <a href="{{ route('city.edit', $city->id) }}" class="button">Szerkesztés</a>
         <form action="{{ route('city.destroy', $city->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="danger" onclick="confirm('Biztos törli?')">Törlés</button>
         </form>
+        @endif
     </li>
     @endforeach
 </ul>
